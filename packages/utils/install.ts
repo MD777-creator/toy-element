@@ -9,10 +9,10 @@ export function makeInstaller(components: Plugin[]) {
   return installer as Plugin;
 }
 
-export const withInstall = <T>(component: SFCWithInstall<T>) => {
-  component.install = (app: App) => {
+export const withInstall = <T>(component: T) => {
+  (component as SFCWithInstall<T>).install = (app: App) => {
     app.component((component as any).name, component as Plugin);
   };
 
-  return component;
+  return component as SFCWithInstall<T>;
 };
